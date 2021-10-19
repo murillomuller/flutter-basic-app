@@ -32,6 +32,16 @@ class ProjectDAO {
     return projects;
   }
 
+  Future<Project> findById(int idProject) async {
+    final Database db = await createDatabase();
+    final List<Map<String, dynamic>> result = db.rawQuery(
+        'SELECT FROM $_tableName WHERE id = ?',
+        [idProject]).then((value) => null) as List<Map<String, dynamic>>;
+
+    Project project = _toList(result).first;
+    return project;
+  }
+
   Map<String, dynamic> _toMap(Project project) {
     final Map<String, dynamic> projectMap = {};
 
