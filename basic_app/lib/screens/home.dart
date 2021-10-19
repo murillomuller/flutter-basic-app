@@ -1,7 +1,8 @@
-import 'package:basic_app/screens/form_add.dart';
+import 'package:basic_app/models/project.dart';
+import 'package:basic_app/screens/projects/add.dart';
 import 'package:flutter/material.dart';
 
-const _titlePage = 'Home Page';
+const _titlePage = 'Projects Ideas';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
@@ -11,7 +12,15 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final List<String> _entries = ['10:00', '13:00', '18:00', '22:00'];
+  final List<Project> _entries = [
+    Project(
+      title: 'Receitinha',
+      description: 'Projeto de Receitas',
+    ),
+    Project(
+        title: 'Cartão Fidelidade',
+        description: 'Projeto de Cartão Fidelidade'),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -31,9 +40,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   ListTile(
-                    leading: Icon(Icons.access_alarms_rounded),
-                    title: Text(entry),
-                    subtitle: Text('Acordar.'),
+                    title: Text(entry.title),
+                    subtitle: Text(entry.description),
                   ),
                 ],
               ),
@@ -46,11 +54,9 @@ class _MyHomePageState extends State<MyHomePage> {
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) {
-                return const FormAddPage(
-                  title: 'Add Timer',
-                );
+                return const FormAddPage();
               }),
-            );
+            ).then((newProject) => debugPrint(newProject.toString()));
           },
         ),
       ),
