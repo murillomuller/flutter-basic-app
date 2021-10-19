@@ -19,6 +19,11 @@ class ProjectDAO {
     return db.insert(_tableName, projectMap);
   }
 
+  Future<int> deleteProject(int idProject) async {
+    final Database db = await createDatabase();
+    return db.rawDelete('DELETE FROM $_tableName WHERE id = ?', [idProject]);
+  }
+
   Future<List<Project>> findAllProjects() async {
     final Database db = await createDatabase();
     final List<Map<String, dynamic>> result = await db.query(_tableName);
