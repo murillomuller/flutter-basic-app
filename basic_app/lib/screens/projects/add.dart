@@ -1,4 +1,4 @@
-import 'package:basic_app/database/app_database.dart';
+import 'package:basic_app/database/dao/project_dao.dart';
 import 'package:basic_app/models/project.dart';
 import 'package:flutter/material.dart';
 
@@ -12,6 +12,8 @@ class FormAddPage extends StatefulWidget {
 }
 
 class _FormAddPageState extends State<FormAddPage> {
+  final ProjectDAO _projectDAO = ProjectDAO();
+
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
 
@@ -53,7 +55,8 @@ class _FormAddPageState extends State<FormAddPage> {
                       final String description = _descriptionController.text;
                       final Project newProject =
                           Project(title: title, description: description);
-                      saveProject(newProject)
+                      _projectDAO
+                          .saveProject(newProject)
                           .then((id) => Navigator.pop(context));
                     },
                     child: const Text('Add Project'),

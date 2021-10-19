@@ -1,4 +1,4 @@
-import 'package:basic_app/database/app_database.dart';
+import 'package:basic_app/database/dao/project_dao.dart';
 import 'package:basic_app/models/project.dart';
 import 'package:basic_app/screens/projects/add.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +13,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  final ProjectDAO _projectDAO = ProjectDAO();
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -24,7 +25,7 @@ class _MyHomePageState extends State<MyHomePage> {
         body: FutureBuilder<List<Project>>(
           initialData: const [],
           future: Future.delayed(const Duration(milliseconds: 200))
-              .then((value) => findAllProjects()),
+              .then((value) => _projectDAO.findAllProjects()),
           builder: (context, snapshot) {
             switch (snapshot.connectionState) {
               case ConnectionState.none:
