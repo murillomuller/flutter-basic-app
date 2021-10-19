@@ -1,3 +1,4 @@
+import 'package:basic_app/database/app_database.dart';
 import 'package:basic_app/models/project.dart';
 import 'package:flutter/material.dart';
 
@@ -52,7 +53,8 @@ class _FormAddPageState extends State<FormAddPage> {
                       final String description = _descriptionController.text;
                       final Project newProject =
                           Project(title: title, description: description);
-                      Navigator.pop(context, newProject);
+                      saveProject(newProject)
+                          .then((id) => Navigator.pop(context));
                     },
                     child: const Text('Add Project'),
                   ),
