@@ -1,3 +1,4 @@
+import 'package:basic_app/components/loading/loading.dart';
 import 'package:basic_app/database/dao/project_dao.dart';
 import 'package:basic_app/models/project.dart';
 import 'package:basic_app/screens/projects/add.dart';
@@ -29,16 +30,7 @@ class _MyHomePageState extends State<MyHomePage> {
             case ConnectionState.none:
               break;
             case ConnectionState.waiting:
-              return Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: const <Widget>[
-                    CircularProgressIndicator(),
-                    Text('Loading'),
-                  ],
-                ),
-              );
+              return const Loading();
             case ConnectionState.active:
               break;
             case ConnectionState.done:
